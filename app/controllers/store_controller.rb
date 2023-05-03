@@ -7,6 +7,8 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 class StoreController < ApplicationController
+  include CurrentCart
+  before_action :set_cart
   def index
     @products = Product.order(:title)
     if session[:access_count].nil?
