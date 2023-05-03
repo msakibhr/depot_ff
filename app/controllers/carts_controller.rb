@@ -8,6 +8,9 @@
 #---
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+
+  before_action :ensure_cart_session, only: [:show, :edit, :update, :destroy]
+
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # GET /carts
   # GET /carts.json
@@ -77,6 +80,12 @@ class CartsController < ApplicationController
 
   def set_cart
     @cart = Cart.find(params[:id])
+  end
+
+  def ensure_cart_session
+    unless @cart.id == session[:cart_id]
+      redirect_to store_index_url, notice: "You can only access your own cart"
+    end
   end
 
   # Only allow a list of trusted parameters through.
