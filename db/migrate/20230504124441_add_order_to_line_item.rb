@@ -6,12 +6,9 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
-Rails.application.routes.draw do
-  resources :orders
-  resources :line_items
-  resources :carts
-  root 'store#index', as: 'store_index'
-  resources :products
-  # For details on the DSL available within this file, see
-  # https://guides.rubyonrails.org/routing.html
+class AddOrderToLineItem < ActiveRecord::Migration[6.0]
+  def change
+    add_reference :line_items, :order, null: true, foreign_key: true
+    change_column :line_items, :cart_id, :integer, null: true
+  end
 end
