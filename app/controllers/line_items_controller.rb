@@ -87,7 +87,7 @@ class LineItemsController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to store_index_url }
-      format.js
+      format.js { redirect_to store_index_url }
     end
   end
 
