@@ -9,7 +9,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :decrement]
+  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :decrement, :increment]
 
   # GET /line_items
   # GET /line_items.json
@@ -91,6 +91,14 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def increment
+    @line_item.quantity += 1
+    @line_item.save
+    respond_to do |format|
+      format.html { redirect_to store_index_url }
+      format.js { redirect_to store_index_url }
+    end
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.

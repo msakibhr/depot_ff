@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :line_items do
     member do
-      post :decrement
+      post :decrement, :increment
     end
   end
 
