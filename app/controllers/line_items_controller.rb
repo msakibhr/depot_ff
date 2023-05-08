@@ -86,8 +86,10 @@ class LineItemsController < ApplicationController
       @line_item.destroy
     end
     respond_to do |format|
-      format.html { redirect_to store_index_url }
-      format.js { redirect_to store_index_url }
+      # format.html { redirect_to store_index_url }
+      # format.js { redirect_to store_index_url }
+      format.html { redirect_to request.referer || store_index_url }
+      format.js { redirect_to request.referer || store_index_url }
     end
   end
 
@@ -95,8 +97,10 @@ class LineItemsController < ApplicationController
     @line_item.quantity += 1
     @line_item.save
     respond_to do |format|
-      format.html { redirect_to store_index_url }
-      format.js { redirect_to store_index_url }
+      # format.html { redirect_to store_index_url }
+      # format.js { redirect_to store_index_url }
+      format.html { redirect_to request.referer || store_index_url }
+      format.js { redirect_to request.referer || store_index_url }
     end
   end
 
