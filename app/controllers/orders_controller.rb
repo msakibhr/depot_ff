@@ -42,6 +42,11 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
+
+
+        # @order.charge!(pay_type_params) # do not do this
+
+
         OrderMailer.received(@order).deliver_later
         format.html { redirect_to store_index_url, notice:
           'Thank you for your order.' }
