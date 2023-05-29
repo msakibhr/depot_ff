@@ -1,9 +1,14 @@
-Dear <%= @order.name %>
+Dear customer,
+<br>
+<!--Dear <%#= @order.email %>-->
 
 Thank you for your recent order from The Pragmatic Store.
 
 You ordered the following items:
-
+<% @skip_increment_and_decrement_buttons = true %>
 <%= render @order.line_items -%>
+<% @skip_increment_and_decrement_buttons = false %>
+<td>Total: <%= number_to_currency($net_price) %></td>
+<br>
 
 We'll send you a separate email when your order ships.

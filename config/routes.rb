@@ -7,7 +7,15 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 Rails.application.routes.draw do
-  resources :orders
+  devise_for :users
+  # resources :orders, only: [:new, :create]
+  resources :orders do
+    collection do
+      get '/history' => 'orders#history'
+      get '/full_history' => 'orders#full_history'
+    end
+
+  end
 
   resources :line_items do
     member do
@@ -18,8 +26,9 @@ Rails.application.routes.draw do
   resources :carts
   root 'store#index', as: 'store_index'
   resources :products do
-  get :who_bought, on: :member
-end
+    get :who_bought, on: :member
+  end
+  resources :users
 
 # For details on the DSL available within this file, see
   # https://guides.rubyonrails.org/routing.html

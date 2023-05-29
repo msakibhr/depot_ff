@@ -5,5 +5,7 @@
 
 <table>
   <tr><th colspan="2">Qty</th><th>Description</th></tr>
+  <% @skip_increment_and_decrement_buttons = true %>
   <%= render @order.line_items -%>
+  <% @skip_increment_and_decrement_buttons = false %>
 </table>

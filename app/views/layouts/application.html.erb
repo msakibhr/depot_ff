@@ -32,6 +32,20 @@
       <li><a href="/contact">Contact</a></li>
 <!--      <li class="loadtime"><%#= Time.now %></li>-->
     </ul>
+
+    <% if user_signed_in? %>
+      <nav class="logged_in_nav">
+        <ul>
+          <% if current_user.role == 'admin' %>
+            <li><%= link_to 'Orders',   orders_path   %></li>
+            <li><%= link_to 'Products', products_path %></li>
+            <li><%= link_to 'Users',    users_path    %></li>
+          <% end %>
+          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete   %></li>
+        </ul>
+      </nav>
+    <% end %>
+
   </nav>
   <main class='<%= controller.controller_name %>'>
     <%= yield %>

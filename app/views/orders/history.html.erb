@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<h1>Order History</h1>
+<table>
+  <tbody>
+    <% @current_line_items.each do |itm| %>
+      <tr>
+        <td class="quantity"><%= itm.quantity %> x </td>
+        <td><%= itm.product.title %></td>
+        <td class="price"><%= number_to_currency(itm.total_price) %></td>
+        <br>
+      </tr>
+  <% end %>
+  <th colspan="2">Total:</th>
+      <td class="price"><%= number_to_currency($net_price) %></td>
+  </tbody>
+</table>
+
+<p>
+  <strong>Email:</strong>
+  <%= @current_order.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @current_order.address %>
+</p>
+
+<!--<p>-->
+<!--  <strong>Email:</strong>-->
+  <%#= @current_order.email %>
+<!--</p>-->
+
+<p>
+  <strong>Pay type:</strong>
+  <%= @current_order.pay_type %>
+</p>
+
+<p>
+  <strong>Ordered at:</strong>
+  <%= @current_order.created_at %>
+</p>
+
+<%= link_to "All Orders' History", full_history_orders_path %>

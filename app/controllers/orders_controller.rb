@@ -35,7 +35,16 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    # @order = Order.new(order_params)
+    @order = current_user.orders.build(order_params)
+    # @order.name = current_user.name
+    puts "********"
+    puts current_user.email
+    puts "********"
+    puts "^^^^^^^^"
+    puts @order.email
+    puts "^^^^^^^^"
+    @order.email = current_user.email
     @order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
@@ -51,7 +60,7 @@ class OrdersController < ApplicationController
 
 
         # OrderMailer.received(@order).deliver_later
-        format.html { redirect_to store_index_url, notice:
+        format.html { redirect_to history_orders_path, notice:
           'Thank you for your order.' }
         format.json { render :show, status: :created,
                              location: @order }
@@ -87,6 +96,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def history
+    @current_order = Order.find_by(id: current_user.id)
+    @current_line_items = @current_order.line_items
+  end
+
+  def full_history
+    @all_orders = Order.where(user_id: current_user.id).order(created_at: :desc)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_order
@@ -95,7 +113,8 @@ class OrdersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:name, :address, :email, :pay_type)
+    # params.require(:order).permit(:name, :address, :email, :pay_type)
+    params.require(:order).permit(:address, :email, :pay_type)
   end
   #...
 

@@ -4,11 +4,6 @@ require_relative 'application'
 # Initialize the Rails application.
 Rails.application.initialize!
 
-
-
-# config.action_mailer.delivery_method = :smtp
-
-
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -20,9 +15,9 @@ Rails.application.configure do
       "domain.of.sender.net",
     authentication: "plain",
     user_name:
-      "dave",
+      "msakibhr",
     password:
-      "secret",
+      "feyeqjtopiqdeowl",
     enable_starttls_auto: true
   }
 end

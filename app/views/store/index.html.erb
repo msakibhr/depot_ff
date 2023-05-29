@@ -5,7 +5,7 @@
 <h1>Your Pragmatic Catalog</h1>
 
 <% if session[:access_count].to_i > 5 %>
-  <p>You have accessed the store index <%= pluralize(@access_count, "time") %>.</p>
+<!--  <p>You have accessed the store index <%#= pluralize(@access_count, "time") %>.</p>-->
 <% end %>
 
 <ul class="catalog">

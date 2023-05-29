@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+<h1>All Orders</h1>
+<%@all_orders.each do |ord| %>
+  <%@linies = ord.line_items %>
+  <table>
+    <tbody>
+    <% @linies.each do |itm| %>
+      <tr>
+        <td class="quantity"><%= itm.quantity %> x </td>
+        <td><%= itm.product.title %></td>
+        <td class="price"><%= number_to_currency(itm.total_price) %></td>
+        <br>
+      </tr>
+    <% end %>
+    <th colspan="2">Total:</th>
+    <%#$net_price = cart.total_price %>
+    <td class="price"><%= number_to_currency($net_price) %></td>
+    </tbody>
+  </table>
+
+  <p>
+    <strong>Email:</strong>
+    <%= ord.email %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= ord.address %>
+  </p>
+
+<!--  <p>-->
+<!--    <strong>Email:</strong>-->
+    <%#= ord.email %>
+<!--  </p>-->
+
+  <p>
+    <strong>Pay type:</strong>
+    <%= ord.pay_type %>
+  </p>
+
+  <p>
+    <strong>Ordered at:</strong>
+    <%= ord.created_at %>
+  </p>
+  <br>
+  <br>
+  <br>
+
+<% end %>
