@@ -7,6 +7,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 class CartsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :destroy
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   before_action :ensure_cart_session, only: [:show, :edit, :update, :destroy]

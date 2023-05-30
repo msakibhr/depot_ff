@@ -97,11 +97,14 @@ class OrdersController < ApplicationController
   end
 
   def history
-    @current_order = Order.find_by(id: current_user.id)
+    @current_order = current_user.orders.last
     @current_line_items = @current_order.line_items
   end
 
   def full_history
+    puts "+++++++++"
+    puts current_user.id
+    puts "+++++++++"
     @all_orders = Order.where(user_id: current_user.id).order(created_at: :desc)
   end
 
