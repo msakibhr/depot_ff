@@ -1,8 +1,9 @@
-Dear customer,
+<!--Dear customer,-->
+<!--<br>-->
+Dear <%= @order.user.username %>,
 <br>
-<!--Dear <%#= @order.email %>-->
 
-Thank you for your recent order from The Pragmatic Store.
+thank you for your recent order from The Pragmatic Store.
 
 You ordered the following items:
 <% @skip_increment_and_decrement_buttons = true %>
